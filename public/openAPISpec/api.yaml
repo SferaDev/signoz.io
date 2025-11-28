@@ -933,7 +933,7 @@ components:
           type: string
         type:
           type: string
-          enum: ["static", "attributes", "resources"]
+          enum: ["static"]
         selected:
           type: boolean
           enum: [true]
