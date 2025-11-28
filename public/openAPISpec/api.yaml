@@ -65,8 +65,24 @@ paths:
             type: string
           example: '<TOKEN>'
       responses:
+        '200':
+          description: Field updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Field'
         '400':
           description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
       requestBody:
         $ref: '#/components/requestBodies/Field'
     get:
@@ -88,7 +104,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Field'
+                $ref: '#/components/schemas/FieldsResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
   '/api/v2/traces/fields':
     post:
       tags:
@@ -104,8 +126,24 @@ paths:
             type: string
           example: '<TOKEN>'
       responses:
+        '200':
+          description: Field updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Field'
         '400':
           description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
       requestBody:
         $ref: '#/components/requestBodies/Field'
     get:
@@ -127,7 +165,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Field'
+                $ref: '#/components/schemas/FieldsResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
   '/api/v1/export_raw_data':
     get:
       tags:
@@ -361,8 +405,29 @@ paths:
             type: string
           example: '<TOKEN>'
       responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiSuccessResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: string
         '400':
           description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
       requestBody:
         $ref: '#/components/requestBodies/Alert'
     get:
@@ -384,7 +449,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Alert'
+                allOf:
+                  - $ref: '#/components/schemas/ApiSuccessResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          rules:
+                            type: array
+                            items:
+                              $ref: '#/components/schemas/Alert'
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
   '/api/v1/rules/{id}':
     get:
       tags:
@@ -412,11 +493,30 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Alert'
+                allOf:
+                  - $ref: '#/components/schemas/ApiSuccessResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Alert'
         '400':
           description: Invalid ID supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
         '404':
           description: Alert not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
     put:
       tags:
         - alerts
@@ -439,8 +539,29 @@ paths:
             type: integer
             format: int64
       responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiSuccessResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: string
         '400':
           description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
       requestBody:
         $ref: '#/components/requestBodies/Alert'
     delete:
@@ -464,8 +585,29 @@ paths:
             type: integer
             format: int64
       responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiSuccessResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: string
         '400':
           description: Invalid ID supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
   '/api/v1/dashboards':
     post:
       tags:
@@ -482,8 +624,29 @@ paths:
           example: '<TOKEN>'
 
       responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiSuccessResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/DashboardResponse'
         '400':
           description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
       requestBody:
         $ref: '#/components/requestBodies/Dashboard'
     get:
@@ -506,7 +669,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dashboard'
+                allOf:
+                  - $ref: '#/components/schemas/ApiSuccessResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/DashboardResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
   '/api/v1/dashboards/{uuid}':
     get:
       tags:
@@ -533,11 +709,30 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dashboard'
+                allOf:
+                  - $ref: '#/components/schemas/ApiSuccessResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/DashboardResponse'
         '400':
           description: Invalid ID supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
         '404':
           description: Dashboard not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
     put:
       tags:
         - dashboards
@@ -559,8 +754,29 @@ paths:
           schema:
             type: string
       responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiSuccessResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/DashboardResponse'
         '400':
           description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
       requestBody:
         $ref: '#/components/requestBodies/Dashboard'
     delete:
@@ -583,8 +799,29 @@ paths:
           schema:
             type: string
       responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiSuccessResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: string
         '400':
           description: Invalid ID supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
   '/api/v4/query_range':
     post:
       tags:
@@ -618,11 +855,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QueryRangeResponse'
+                allOf:
+                  - $ref: '#/components/schemas/ApiSuccessResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/QueryRangeResponse'
         '400':
           description: Bad request parameters
-        '500':
-          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
 
   '/api/v5/query_range':
     post:
@@ -665,11 +909,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QueryRangeResponseV5'
+                allOf:
+                  - $ref: '#/components/schemas/ApiSuccessResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/QueryRangeResponseV5'
         '400':
           description: Bad request parameters
-        '500':
-          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
 
 components:
   schemas:
@@ -682,10 +933,47 @@ components:
           type: string
         type:
           type: string
-          enum: ["static"]
+          enum: ["static", "attributes", "resources"]
         selected:
           type: boolean
           enum: [true]
+    FieldsResponse:
+      type: object
+      description: Response containing selected and interesting fields
+      properties:
+        selected:
+          type: array
+          description: Selected/static fields
+          items:
+            $ref: '#/components/schemas/Field'
+        interesting:
+          type: array
+          description: Interesting/suggested fields
+          items:
+            $ref: '#/components/schemas/Field'
+    DashboardResponse:
+      type: object
+      description: Response containing dashboard metadata and data
+      properties:
+        id:
+          type: string
+          description: UUID of the dashboard
+        createdAt:
+          type: string
+          format: date-time
+          description: Creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: Last update timestamp
+        createdBy:
+          type: string
+          description: Email of the creator
+        updatedBy:
+          type: string
+          description: Email of the last updater
+        data:
+          $ref: '#/components/schemas/Dashboard'
     ApiResponse:
       type: object
       properties:
@@ -2559,6 +2847,65 @@ components:
             properties:
               message:
                 type: string
+
+    ErrorDetail:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: Error code identifying the type of error
+          example: "invalid_input"
+        message:
+          type: string
+          description: Human-readable error message
+          example: "unknown field \"queries\""
+        errors:
+          type: array
+          description: Additional error details
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+
+    ApiSuccessResponse:
+      type: object
+      description: |
+        Successful API response envelope.
+      required:
+        - status
+        - data
+      properties:
+        status:
+          type: string
+          enum: ['success']
+        data:
+          description: Response data. The structure varies by endpoint.
+
+    ApiErrorResponse:
+      type: object
+      description: |
+        Error API response envelope.
+      required:
+        - status
+        - error
+      properties:
+        status:
+          type: string
+          enum: ['error']
+        error:
+          description: Error details. Can be a simple string or a structured error object.
+          oneOf:
+            - type: string
+              example: "composite query is required"
+            - $ref: '#/components/schemas/ErrorDetail'
+        errorType:
+          type: string
+          description: Type of error (optional, for categorizing errors)
+          example: "bad_data"
 
   requestBodies:
     Field:
